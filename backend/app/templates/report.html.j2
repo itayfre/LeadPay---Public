@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face {
+  font-family: 'Heebo';
+  src: url('file://{{ font_dir }}/Heebo-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Heebo';
+  src: url('file://{{ font_dir }}/Heebo-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+@page {
+  size: A4 portrait;
+  margin: 18mm 15mm 22mm 15mm;
+  @top-left {
+    content: "{{ payload.building.name }} | {{ payload.period.label }}";
+    font-family: 'Heebo', sans-serif;
+    font-size: 8pt;
+    color: #666;
+  }
+  @bottom-right {
+    content: "עמוד " counter(page) " | LeadPay";
+    font-family: 'Heebo', sans-serif;
+    font-size: 8pt;
+    color: #666;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  font-family: 'Heebo', sans-serif;
+  font-size: 10pt;
+  color: #1a1a1a;
+  line-height: 1.5;
+  margin: 0;
+}
+h1 { font-size: 18pt; text-align: center; margin: 0 0 3mm; font-weight: 700; }
+h2 { font-size: 12pt; font-weight: 700; margin: 8mm 0 3mm; border-bottom: 1.5px solid #ddd; padding-bottom: 1.5mm; }
+h3 { font-size: 10pt; font-weight: 700; margin: 5mm 0 2mm; }
+.meta { text-align: center; color: #555; font-size: 10pt; margin-bottom: 6mm; }
+.summary { display: flex; gap: 4mm; margin-bottom: 6mm; }
+.card {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 4mm;
+  text-align: center;
+}
+.card .label { font-size: 8pt; color: #666; }
+.card .value { font-size: 14pt; font-weight: 700; margin-top: 2mm; color: #1a1a1a; }
+.subtitle { font-size: 9pt; color: #555; margin-bottom: 3mm; }
+table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-bottom: 3mm; }
+th, td { border: 1px solid #ddd; padding: 1.5mm 2mm; text-align: start; word-break: keep-all; }
+th { background: #f0f0f0; font-weight: 700; }
+tr.subtotal td, tr.grand-total td { font-weight: 700; background: #f5f5f5; }
+tr.grand-total td { background: #e8e8e8; }
+.num { font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: embed; }
+.empty { color: #888; font-style: italic; text-align: center; padding: 5mm; }
+</style>
+</head>
+<body>
+
+<h1>דוח הכנסות והוצאות</h1>
+<div class="meta">
+  {{ payload.building.name }} · {{ payload.building.address }}, {{ payload.building.city }}<br>
+  {{ payload.period.label }}
+</div>
+
+<h2>סיכום</h2>
+<div class="summary">
+  <div class="card">
+    <div class="label">מאזן נוכחי</div>
+    <div class="value">₪{{ "{:,.0f}".format(payload.summary.net_balance) }}</div>
+  </div>
+  <div class="card">
+    <div class="label">סה״כ הוצאות</div>
+    <div class="value">₪{{ "{:,.0f}".format(payload.summary.total_expenses) }}</div>
+  </div>
+  <div class="card">
+    <div class="label">סה״כ הכנסות</div>
+    <div class="value">₪{{ "{:,.0f}".format(payload.summary.total_income) }}</div>
+  </div>
+</div>
+
+<h2>פירוט הכנסות לפי דייר</h2>
+{% if payload.building.expected_monthly_payment %}
+<p class="subtitle">דמי ועד חודשי: ₪{{ "{:,.0f}".format(payload.building.expected_monthly_payment) }} לדירה</p>
+{% endif %}
+<table>
+  <thead>
+    <tr>
+      <th>דירה</th>
+      <th>שם דייר</th>
+      {% for col in payload.period.columns %}<th>{{ col.label }}</th>{% endfor %}
+      <th>שולם</th>
+      <th>לתשלום</th>
+      <th>יתרה</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in payload.income_by_tenant %}
+    <tr>
+      <td>{{ row.apartment_number }}</td>
+      <td>{{ row.tenant_name }}</td>
+      {% for cell in row.cells %}<td class="num">₪{{ "{:,.0f}".format(cell.amount) }}</td>{% endfor %}
+      <td class="num">₪{{ "{:,.0f}".format(row.paid_total) }}</td>
+      <td class="num">₪{{ "{:,.0f}".format(row.expected_total) }}</td>
+      <td class="num">{% if row.balance > 0 %}₪{{ "{:,.0f}".format(row.balance) }}{% else %}—{% endif %}</td>
+    </tr>
+    {% endfor %}
+    <tr class="subtotal">
+      <td colspan="2">סה״כ</td>
+      {% for cell in payload.income_totals_row.cells %}<td class="num">₪{{ "{:,.0f}".format(cell.amount) }}</td>{% endfor %}
+      <td class="num">₪{{ "{:,.0f}".format(payload.income_totals_row.paid_total) }}</td>
+      <td class="num">₪{{ "{:,.0f}".format(payload.income_totals_row.expected_total) }}</td>
+      <td class="num">{% if payload.income_totals_row.balance > 0 %}₪{{ "{:,.0f}".format(payload.income_totals_row.balance) }}{% else %}—{% endif %}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>פירוט הוצאות</h2>
+{% if payload.expenses_by_month %}
+<table>
+  <thead>
+    <tr><th>חודש</th><th>תיאור</th><th>קטגוריה</th><th>סכום</th></tr>
+  </thead>
+  <tbody>
+    {% for group in payload.expenses_by_month %}
+      {% for exp in group.rows %}
+      <tr>
+        <td>{% if loop.first %}{{ group.month_label }}{% endif %}</td>
+        <td>{{ exp.description }}</td>
+        <td>{{ exp.category }}</td>
+        <td class="num">₪{{ "{:,.2f}".format(exp.amount) }}</td>
+      </tr>
+      {% endfor %}
+      <tr class="subtotal">
+        <td colspan="3">סה״כ {{ group.month_label }}</td>
+        <td class="num">₪{{ "{:,.2f}".format(group.subtotal) }}</td>
+      </tr>
+    {% endfor %}
+    <tr class="grand-total">
+      <td colspan="3">סה״כ הוצאות</td>
+      <td class="num">₪{{ "{:,.2f}".format(payload.expenses_grand_total) }}</td>
+    </tr>
+  </tbody>
+</table>
+{% else %}
+<div class="empty">אין הוצאות בתקופה זו</div>
+{% endif %}
+
+{% if payload.debtors_period or payload.debtors_lifetime %}
+<h2>חייבים – יתרת חוב פתוח</h2>
+
+{% if payload.debtors_period %}
+<h3>חוב לתקופה זו</h3>
+<table>
+  <thead><tr><th>דירה</th><th>שם דייר</th><th>חוב</th><th>הערה</th></tr></thead>
+  <tbody>
+    {% for d in payload.debtors_period %}
+    <tr>
+      <td>{{ d.apartment_number }}</td>
+      <td>{{ d.tenant_name }}</td>
+      <td class="num">₪{{ "{:,.0f}".format(d.debt) }}</td>
+      <td>{{ d.note }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% if payload.debtors_lifetime %}
+<h3>יתרת חוב כוללת</h3>
+<table>
+  <thead><tr><th>דירה</th><th>שם דייר</th><th>חוב</th><th>הערה</th></tr></thead>
+  <tbody>
+    {% for d in payload.debtors_lifetime %}
+    <tr>
+      <td>{{ d.apartment_number }}</td>
+      <td>{{ d.tenant_name }}</td>
+      <td class="num">₪{{ "{:,.0f}".format(d.debt) }}</td>
+      <td>{{ d.note }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endif %}
+
+</body>
+</html>

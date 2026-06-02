@@ -1,0 +1,440 @@
+{
+  "app": {
+    "title": "LeadPay",
+    "subtitle": "מערכת ניהול תשלומים לבניינים"
+  },
+  "nav": {
+    "dashboard": "לוח בקרה",
+    "buildings": "בניינים",
+    "payments": "תשלומים",
+    "messages": "הודעות",
+    "settings": "הגדרות",
+    "tenants": "דיירים",
+    "statements": "העלאת דפי חשבון",
+    "transactions": "תנועות",
+    "users": "ניהול משתמשים"
+  },
+  "layout": {
+    "welcome": "ברוך הבא ל-LeadPay",
+    "tagline": "נהל את תשלומי הדיירים בקלות"
+  },
+  "roles": {
+    "manager": "מנהל",
+    "worker": "עובד",
+    "viewer": "צופה",
+    "tenant": "דייר"
+  },
+  "dashboard": {
+    "title": "סטטוס תשלומים",
+    "period": "תקופה",
+    "uploadStatement": "העלה דף חשבון",
+    "sendReminders": "שלח תזכורות",
+    "paid": "שילמו",
+    "partial": "חלקי",
+    "unpaid": "לא שילמו",
+    "totalExpected": "צפוי",
+    "totalCollected": "נגבה",
+    "collectionRate": "אחוז גבייה",
+    "noTenants": "אין דיירים רשומים",
+    "noTenantsHint": "הוסף דיירים כדי לעקוב אחר תשלומים",
+    "manageTenants": "ניהול דיירים"
+  },
+  "payment": {
+    "apartment": "דירה",
+    "tenant": "דייר",
+    "expected": "צפוי",
+    "paid": "שולם",
+    "status": "סטטוס",
+    "actions": "פעולות",
+    "sendWhatsApp": "שלח הודעה",
+    "monthlyExpected": "תשלום חודשי",
+    "currentDebt": "חוב נוכחי",
+    "totalPaid": "שולם",
+    "balance": "יתרה",
+    "annualExpected": "תשלום שנתי"
+  },
+  "collection": {
+    "viewTable": "📋 טבלה",
+    "viewMatrix": "🗓 מטריצה שנתית",
+    "matrixShowingYear": "מציג ינואר–דצמבר {{year}}",
+    "matrix": {
+      "prevYear": "שנה קודמת",
+      "nextYear": "שנה הבאה"
+    },
+    "matrixLegend": {
+      "title": "מקרא",
+      "paid": "שולם — לחץ לעריכה",
+      "partial": "חלקי",
+      "overdue": "חוב — חודש שעבר",
+      "future": "טרם הגיע מועד",
+      "standingOrder": "הוראת קבע פעילה",
+      "empty": "אין ציפייה"
+    },
+    "cell": {
+      "editPayment": "לחץ לעריכת התשלום",
+      "addPayment": "לחץ לרישום תשלום",
+      "prepay": "לחץ להוספת תשלום מוקדם",
+      "completePartial": "תשלום חלקי — לחץ להשלמה"
+    },
+    "standingOrder": {
+      "title": "הוראת קבע",
+      "active": "הוראת קבע פעילה",
+      "enable": "הפעל הוראת קבע",
+      "toggle": "החלף מצב הוראת קבע",
+      "activeLabel": "הוראת קבע פעילה לדייר זה",
+      "startFrom": "החל מחודש",
+      "expectedTooltip": "הוראת קבע — צפוי להיגבות"
+    },
+    "viewApartment": "🏢 לפי דירה",
+    "apartment": {
+      "header": "גבייה לפי דירה",
+      "aptNumber": "דירה",
+      "primaryPayer": "משלם ראשי",
+      "noActivePayer": "אין משלם פעיל — באחריות הבעלים",
+      "otherTenants": "דיירים נוספים",
+      "totalBalance": "יתרה",
+      "monthlyBalance": "חוב חודשי",
+      "specialBalance": "חוב חד-פעמי",
+      "statusPaid": "שולם",
+      "statusPartial": "חלקי",
+      "statusUnpaid": "לא שולם",
+      "statusOwnerLiable": "באחריות הבעלים",
+      "roleOwner": "בעלים",
+      "roleLandlord": "משכיר",
+      "roleRenter": "שוכר",
+      "inactive": "לא פעיל",
+      "noData": "אין דירות להצגה",
+      "loading": "טוען נתוני גבייה...",
+      "errorTitle": "שגיאה בטעינת נתוני גבייה",
+      "assignOwner": "הקצה בעלים",
+      "assignOwnerHint": "אין בעלים מוגדר. בחר אחד מהדיירים:",
+      "assignOwnerSave": "שמירה",
+      "assignOwnerCancel": "ביטול",
+      "noTenantsToAssign": "אין דיירים על דירה זו"
+    }
+  },
+  "buildings": {
+    "addBuilding": "הוסף בניין",
+    "searchPlaceholder": "חיפוש לפי שם או כתובת...",
+    "allCities": "כל הערים",
+    "filterSize": "גודל:",
+    "filterStatus": "סטטוס:",
+    "all": "הכל",
+    "allPaid": "שולם",
+    "partialPaid": "חלקי",
+    "nonePaid": "לא שולם",
+    "small": "קטן (1–5)",
+    "medium": "בינוני (6–15)",
+    "large": "גדול (16+)",
+    "noData": "אין נתונים לתקופה זו",
+    "viewPayments": "צפה בסטטוס תשלומים",
+    "editDetails": "ערוך פרטים",
+    "deleteBuilding": "מחק בניין",
+    "deleteConfirm": "האם אתה בטוח שברצונך למחוק את \"{{name}}\"? פעולה זו תמחק גם את כל הדיירים, דפי החשבון וההודעות הקשורים לבניין זה. פעולה זו לא ניתנת לביטול!",
+    "deleteConfirmCta": "מחק לצמיתות",
+    "chart": {
+      "title": "מגמת גבייה — 13 חודשים",
+      "subtitle": "שיעור גבייה לכל בניין לפי חודש"
+    },
+    "header": {
+      "summary": "{{count}} בניינים מתוך {{total}}"
+    },
+    "kpi": {
+      "collectionRate": "אחוז גבייה החודש",
+      "collected": "נגבה",
+      "overdue": "בפיגור",
+      "atRisk": "בניינים בסיכון",
+      "outOf": "מתוך",
+      "outOfTotal": "מתוך {{total}}",
+      "unpaidTenants_one": "{{count}} דייר לא שילם",
+      "unpaidTenants_other": "{{count}} דיירים לא שילמו",
+      "needsAttention": "דורש תשומת לב"
+    },
+    "card": {
+      "target": "יעד",
+      "collected": "נגבה",
+      "overdue": "פיגור",
+      "units_one": "יחידה אחת",
+      "units_other": "{{count}} יחידות",
+      "paidOfTotal": "{{paid}}/{{total}} שילמו",
+      "noMonthlyRate": "לא הוגדר תעריף חודשי",
+      "trend13m": "מגמת 13 חודשים",
+      "noTrend": "אין נתונים"
+    },
+    "status": {
+      "onTrack": "במסלול",
+      "partial": "פיגור חלקי",
+      "atRisk": "סיכון גבוה",
+      "needsSetup": "דרוש הגדרה"
+    },
+    "empty": {
+      "title": "אין בניינים במערכת",
+      "body": "הוסף בניין כדי להתחיל לעקוב אחר תשלומים",
+      "firstCta": "הוסף בניין ראשון",
+      "filteredTitle": "לא נמצאו בניינים התואמים לסינון",
+      "filteredBody": "נסה לשנות את פרמטרי החיפוש או הסינון"
+    }
+  },
+  "whatsapp": {
+    "title": "שלח תזכורות WhatsApp",
+    "generating": "מייצר הודעות...",
+    "ready": "הודעות מוכנות",
+    "click": "לחץ כדי לשלוח",
+    "sent": "נשלח"
+  },
+  "upload": {
+    "dragDrop": "גרור קובץ לכאן או לחץ לבחירה",
+    "uploading": "מעלה...",
+    "success": "הועלה בהצלחה!",
+    "error": "שגיאה בהעלאה",
+    "recentUploads": {
+      "title": "העלאות אחרונות",
+      "empty": "עוד לא הועלו דפי חשבון לבניין זה",
+      "showMore": "הצג עוד ({{count}})",
+      "transactions": "{{count}} עסקאות",
+      "matched": "{{count}} הותאמו",
+      "unmatched": "{{count}} לא הותאמו"
+    },
+    "delete": {
+      "confirmTitle": "מחיקת ההעלאה ״{{filename}}״",
+      "confirmBody": "פעולה זו תמחק לצמיתות את ההעלאה ואת כל {{count}} העסקאות שבה. ההתאמות שנלמדו יישמרו. לא ניתן לשחזר פעולה זו."
+    }
+  },
+  "transaction": {
+    "edit": {
+      "title": "עריכת עסקה",
+      "fields": {
+        "date": "תאריך",
+        "desc": "תיאור",
+        "amount": "סכום"
+      },
+      "splitError": {
+        "title": "לא ניתן לעדכן את הסכום",
+        "body": "עסקה זו מחולקת בין {{count}} התאמות (לדוגמה: בין כמה דיירים או חודשים). שינוי הסכום הכולל ידרוש להגדיר מחדש את החלוקה.\n\nכדי לעדכן את הסכום:\n1. סגור חלון זה\n2. לחץ על ״פתח את עורך ההתאמות״ למטה\n3. עדכן את החלוקה לסכום החדש",
+        "cta": "פתח את עורך ההתאמות"
+      }
+    },
+    "delete": {
+      "confirmTitle": "מחיקת עסקה",
+      "confirmBody": "האם למחוק את העסקה? פעולה זו תסיר את העסקה ואת התשלום המקושר אליה לדייר. לא ניתן לשחזר."
+    }
+  },
+  "common": {
+    "save": "שמור",
+    "cancel": "בטל",
+    "delete": "מחק",
+    "edit": "ערוך",
+    "loading": "טוען...",
+    "saving": "שומר...",
+    "error": "שגיאה",
+    "success": "הצלחה",
+    "close": "סגור"
+  },
+  "settings": {
+    "thresholds": {
+      "title": "ספי סיכון לבניינים",
+      "description": "מגדיר מתי בניין מסומן \"בסיכון\" / \"חלקי\" / \"במסלול\" בדף הבית",
+      "partialLabel": "פיגור חלקי מתחת ל-",
+      "partialHint": "בניינים עם גביה נמוכה מסף זה מסומנים כ\"סיכון גבוה\"",
+      "onTrackLabel": "במסלול מעל ל-",
+      "onTrackHint": "בניינים עם גביה מעל סף זה מסומנים כ\"במסלול\"",
+      "save": "שמור",
+      "saved": "נשמר",
+      "resetDefaults": "אפס לברירות מחדל",
+      "errors": {
+        "integer": "הזן מספרים שלמים בלבד",
+        "range": "הספים חייבים להיות בין 0 ל-100",
+        "order": "סף הפיגור חייב להיות נמוך מסף המסלול",
+        "notManager": "רק מנהלים יכולים לערוך הגדרה זו"
+      }
+    }
+  },
+  "review": {
+    "currentSection": "מהקובץ שהעלית עכשיו",
+    "currentSubtitle": "הקובץ שהעלית עתה: דף בנק {{period}}.",
+    "currentEmpty": "כל התשלומים מהדף הזה שובצו לדיירים. אפשר לאשר את ההעלאה.",
+    "legacySection": "תשלומים מהעלאות קודמות",
+    "legacySubtitle": "תשלומים מדפי בנק שהעלית בעבר ועדיין לא שובצו לדייר. אינם חלק מהדף הנוכחי, אך מומלץ לטפל בהם.",
+    "legacyChip": "מדף {{period}}",
+    "legacyBannerOne": "תשלום אחד שלא שובץ בהעלאות קודמות מופיע בהמשך, מתחת לתשלומים מהקובץ הנוכחי.",
+    "legacyBannerMany": "{{count}} תשלומים שלא שובצו בהעלאות קודמות מופיעים בהמשך, מתחת לתשלומים מהקובץ הנוכחי."
+  },
+  "building": {
+    "tabs": {
+      "summary": "סיכום",
+      "collection": "גבייה",
+      "expenses": "הוצאות",
+      "aria_label": "ניווט לשוניות בניין"
+    },
+    "range": {
+      "thisMonth": "החודש",
+      "3months": "3 חודשים",
+      "6months": "6 חודשים",
+      "12months": "12 חודשים",
+      "custom": "מותאם אישית",
+      "from": "מ",
+      "to": "עד",
+      "months_count": "חודשים",
+      "error_order": "תאריך ההתחלה חייב להיות לפני תאריך הסיום"
+    },
+    "summary": {
+      "placeholder_title": "תרשימי סיכום בקרוב",
+      "placeholder_body": "לשונית הסיכום תציג KPIs, מגמות גבייה, הוצאות לפי קטגוריה ועוד."
+    },
+    "expenses": {
+      "placeholder_title": "ניהול הוצאות בקרוב",
+      "placeholder_body": "כאן תוכל לסווג הוצאות ולצפות בדוחות.",
+      "title": "הוצאות",
+      "items": "פריטים",
+      "bulk_categorize": "סווג בכמות",
+      "manage_categories": "ניהול קטגוריות",
+      "all": "הכל",
+      "uncategorized": "ללא קטגוריה",
+      "empty_title": "אין הוצאות לתקופה זו",
+      "empty_body": "הוצאות מדפי חשבון יופיעו כאן",
+      "no_match": "אין הוצאות לקטגוריה זו",
+      "col_date": "תאריך",
+      "col_description": "תיאור",
+      "col_vendor": "ספק",
+      "col_category": "קטגוריה",
+      "col_amount": "סכום",
+      "subtotal": "סה\"כ מסונן",
+      "total": "סה\"כ",
+      "bulk_categorize_title": "סיווג הוצאות בכמות",
+      "uncategorized_items": "פריטים ללא קטגוריה",
+      "select_category_to_assign": "בחר קטגוריה לשיוך",
+      "selected": "נבחרו",
+      "select_items": "בחר פריטים לסיווג",
+      "apply_category": "החל קטגוריה",
+      "bulk_error": "שגיאה בסיווג. נסה שוב."
+    },
+    "categories": {
+      "title": "ניהול קטגוריות",
+      "default": "ברירת מחדל",
+      "empty": "אין קטגוריות",
+      "add_new": "הוסף קטגוריה חדשה",
+      "name_placeholder": "שם קטגוריה...",
+      "add": "הוסף",
+      "duplicate_name": "קטגוריה בשם זה כבר קיימת",
+      "delete_blocked": "לא ניתן למחוק קטגוריה עם הוצאות משויכות"
+    }
+  },
+  "summary": {
+    "kpi": {
+      "avg_rate": "אחוז גבייה ממוצע",
+      "open_ar": "חוב פתוח (החודש)",
+      "open_ar_hint": "חוב מצטבר לתקופה הנוכחית",
+      "avg_days": "ממוצע ימים לתשלום",
+      "days": "ימים",
+      "exp_vs_income": "הוצאות מול הכנסות",
+      "income": "הכנסות",
+      "expenses": "הוצאות",
+      "expense_ratio": "הוצאות מהכנסות"
+    },
+    "chart": {
+      "no_data": "אין נתונים לתקופה זו",
+      "no_expenses": "אין הוצאות לתקופה זו",
+      "trend_title": "מגמת גבייה",
+      "expenses_title": "הוצאות לפי קטגוריה",
+      "aging_title": "פילוח זמן גבייה",
+      "worst_payers_title": "הגובים הכי פחות (TOP 5)"
+    },
+    "expenses": {
+      "uncategorized": "לא מסווג",
+      "uncategorized_prompt": "סווג הוצאות כדי לראות פילוח לפי קטגוריה",
+      "go_categorize": "עבור לניהול הוצאות"
+    },
+    "aging": {
+      "days_0_7": "שולם תוך 7 ימים",
+      "days_8_30": "8–30 ימים",
+      "days_31_60": "31–60 ימים",
+      "days_60plus": "60+ ימים",
+      "unpaid": "לא שולם",
+      "payments": "תשלומים"
+    },
+    "worst_payers": {
+      "apt": "דירה",
+      "no_data": "כל הדיירים שילמו בזמן! 🎉",
+      "hint": "לחץ על שורה לצפייה בפרטי הדייר"
+    }
+  },
+  "specialCharge": {
+    "addButton": "➕ הוצאה חד-פעמית",
+    "modalTitle": "הוספת הוצאה חד-פעמית",
+    "titleLabel": "כותרת",
+    "titlePlaceholder": "לדוגמה: תיקון מעלית Q1",
+    "descriptionLabel": "תיאור (לא חובה)",
+    "descriptionPlaceholder": "הקשר מפורט יותר",
+    "totalAmountLabel": "סכום כולל (₪)",
+    "perApartmentAmountLabel": "סכום לדירה (₪)",
+    "splitMethodLabel": "אופן חלוקה",
+    "splitEqual": "שווה בין כולם",
+    "splitCustom": "מותאם אישית",
+    "splitWeight": "לפי משקל הדירה",
+    "splitFlat": "סכום קבוע לדירה",
+    "splitEqualHelp": "הסכום הכולל מחולק שווה. שאריות אגורה מתאזנות בדירה האחרונה.",
+    "splitCustomHelp": "הזן סכום ספציפי לכל דירה. סכום הזנות חייב להיות שווה לסכום הכולל.",
+    "splitWeightHelp": "מתחלק לפי שדה weight של הדירה. דירות ללא משקל לא יחויבו.",
+    "splitFlatHelp": "כל דירה שבחרת תחויב באותו הסכום.",
+    "apartmentsLabel": "דירות לחיוב",
+    "selectAll": "בחר הכל",
+    "selectNone": "נקה",
+    "apartmentsSelected": "{{n}} דירות נבחרו",
+    "dueDateLabel": "תאריך לתשלום (לא חובה)",
+    "submitLabel": "יצירת חיוב",
+    "submitting": "יוצר...",
+    "cancel": "ביטול",
+    "previewTitle": "תצוגה מקדימה",
+    "previewRowsTotal": "{{n}} חיובים, סה\"כ {{amount}} ₪",
+    "noApartmentsError": "יש לבחור לפחות דירה אחת",
+    "titleRequired": "יש להזין כותרת",
+    "amountRequired": "יש להזין סכום",
+    "customSumMismatch": "סכום החיובים האישיים ({{actual}}) אינו תואם את הסכום הכולל ({{expected}})",
+    "savedToast": "החיוב החד-פעמי נוצר בהצלחה"
+  },
+  "monthlyImport": {
+    "addButton": "📤 ייבוא סכומי חודש",
+    "modalTitle": "ייבוא סכומי תשלום חודשי מ-Excel",
+    "fileLabel": "קובץ Excel",
+    "fileHint": "הקובץ צריך להיות בפורמט \"דיירים\" - דירה, קומה, סיווג, שם, טלפון, גובה תשלום.",
+    "previewing": "מעבד את הקובץ...",
+    "previewTitle": "תצוגה מקדימה",
+    "matchedCount": "{{n}} דירות נמצאו",
+    "unmatchedCount": "{{n}} דירות לא הותאמו",
+    "updateCount": "{{n}} שינויים יוחלו",
+    "aptHeader": "דירה",
+    "currentHeader": "נוכחי",
+    "newHeader": "חדש",
+    "deltaHeader": "שינוי",
+    "statusHeader": "מצב",
+    "statusUnchanged": "ללא שינוי",
+    "statusUpdate": "עדכון",
+    "statusNewValue": "חדש",
+    "statusUnmatched": "לא הותאם",
+    "scopeLabel": "היקף ההחלה",
+    "scopeFutureOnly": "רק חודשים עתידיים",
+    "scopeFutureOnlyHelp": "מעדכן את הסכום שצפוי לחודש הבא ואילך. חודשים שכבר נוצרו (כולל החודש הנוכחי) לא ישתנו.",
+    "scopeFuturePlusCurrent": "עתידיים + החודש הנוכחי",
+    "scopeFuturePlusCurrentHelp": "בנוסף, מעדכן את החודש הנוכחי אם עוד לא שולם.",
+    "scopeAllUnpaid": "כל החודשים שעדיין לא שולמו",
+    "scopeAllUnpaidHelp": "גם חודשים בעבר ששטרם שולמו יעודכנו לסכום החדש. חודשים ששולמו - לא משתנים.",
+    "applyButton": "יישום",
+    "applying": "מיישם...",
+    "cancel": "ביטול",
+    "noFileSelected": "יש לבחור קובץ",
+    "wrongFileType": "יש להעלות קובץ Excel (.xlsx)",
+    "appliedResult": "הייבוא הושלם: {{apts}} דירות עודכנו, {{periods}} חודשים שונו"
+  },
+  "auth": {
+    "emailLabel": "כתובת אימייל",
+    "passwordLabel": "סיסמה",
+    "signIn": "כניסה למערכת",
+    "signingIn": "מתחבר...",
+    "error": "שגיאה בהתחברות",
+    "newTenant": "דייר חדש?",
+    "registerHere": "הירשם כאן"
+  },
+  "breadcrumb": {
+    "home": "דף הבית"
+  }
+}

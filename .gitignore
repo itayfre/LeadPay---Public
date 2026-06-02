@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+# backend/venv is a symlink to the 3.11 venv — ignore the symlink too
+venv
+*.egg-info/
+.eggs/
+
+# Environment
+.env
+.env.local
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads
+uploads/
+*.xlsx
+*.xls
+
+# Database
+*.db
+*.sqlite3
+# Debrief reports
+Debrief/
+.vercel
+
+# Git worktrees
+.worktrees/

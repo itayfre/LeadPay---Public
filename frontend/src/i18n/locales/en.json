@@ -1,0 +1,440 @@
+{
+  "app": {
+    "title": "LeadPay",
+    "subtitle": "Building Management Payment Tracker"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "buildings": "Buildings",
+    "payments": "Payments",
+    "messages": "Messages",
+    "settings": "Settings",
+    "tenants": "Tenants",
+    "statements": "Bank Statements",
+    "transactions": "Transactions",
+    "users": "User Management"
+  },
+  "layout": {
+    "welcome": "Welcome to LeadPay",
+    "tagline": "Manage tenant payments easily"
+  },
+  "roles": {
+    "manager": "Manager",
+    "worker": "Worker",
+    "viewer": "Viewer",
+    "tenant": "Tenant"
+  },
+  "dashboard": {
+    "title": "Payment Status",
+    "period": "Period",
+    "uploadStatement": "Upload Statement",
+    "sendReminders": "Send Reminders",
+    "paid": "Paid",
+    "partial": "Partial",
+    "unpaid": "Unpaid",
+    "totalExpected": "Expected",
+    "totalCollected": "Collected",
+    "collectionRate": "Collection Rate",
+    "noTenants": "No tenants registered",
+    "noTenantsHint": "Add tenants to track payments",
+    "manageTenants": "Manage Tenants"
+  },
+  "payment": {
+    "apartment": "Apt",
+    "tenant": "Tenant",
+    "expected": "Expected",
+    "paid": "Paid",
+    "status": "Status",
+    "actions": "Actions",
+    "sendWhatsApp": "Send Message",
+    "monthlyExpected": "Monthly",
+    "currentDebt": "Current debt",
+    "totalPaid": "Paid",
+    "balance": "Balance",
+    "annualExpected": "Annual"
+  },
+  "collection": {
+    "viewTable": "📋 Table",
+    "viewMatrix": "🗓 Annual matrix",
+    "matrixShowingYear": "Showing January–December {{year}}",
+    "matrix": {
+      "prevYear": "Previous year",
+      "nextYear": "Next year"
+    },
+    "matrixLegend": {
+      "title": "Legend",
+      "paid": "Paid — click to edit",
+      "partial": "Partial",
+      "overdue": "Overdue",
+      "future": "Not yet due",
+      "standingOrder": "Standing order active",
+      "empty": "No expectation"
+    },
+    "cell": {
+      "editPayment": "Click to edit payment",
+      "addPayment": "Click to record payment",
+      "prepay": "Click to add prepayment",
+      "completePartial": "Partial — click to complete"
+    },
+    "standingOrder": {
+      "title": "Standing order",
+      "active": "Standing order active",
+      "enable": "Enable standing order",
+      "toggle": "Toggle standing order",
+      "activeLabel": "Standing order active for this tenant",
+      "startFrom": "Start from",
+      "expectedTooltip": "Standing order — expected"
+    },
+    "viewApartment": "🏢 By apartment",
+    "apartment": {
+      "header": "Collection by apartment",
+      "aptNumber": "Apt",
+      "primaryPayer": "Main payer",
+      "noActivePayer": "No active payer — owner liable",
+      "otherTenants": "Other tenants",
+      "totalBalance": "Balance",
+      "monthlyBalance": "Monthly",
+      "specialBalance": "Special",
+      "statusPaid": "Paid",
+      "statusPartial": "Partial",
+      "statusUnpaid": "Unpaid",
+      "statusOwnerLiable": "Owner liable",
+      "roleOwner": "Owner",
+      "roleLandlord": "Landlord",
+      "roleRenter": "Renter",
+      "inactive": "Inactive",
+      "noData": "No apartments to display",
+      "loading": "Loading collection data...",
+      "errorTitle": "Error loading collection data",
+      "assignOwner": "Assign owner",
+      "assignOwnerHint": "No owner on file. Pick one of the apartment tenants:",
+      "assignOwnerSave": "Save",
+      "assignOwnerCancel": "Cancel",
+      "noTenantsToAssign": "No tenants on this apartment yet"
+    }
+  },
+  "buildings": {
+    "addBuilding": "Add Building",
+    "searchPlaceholder": "Search by name or address...",
+    "allCities": "All Cities",
+    "filterSize": "Size:",
+    "filterStatus": "Status:",
+    "all": "All",
+    "allPaid": "Paid",
+    "partialPaid": "Partial",
+    "nonePaid": "Unpaid",
+    "small": "Small (1–5)",
+    "medium": "Medium (6–15)",
+    "large": "Large (16+)",
+    "noData": "No data for this period",
+    "viewPayments": "View Payment Status",
+    "editDetails": "Edit Details",
+    "deleteBuilding": "Delete Building",
+    "deleteConfirm": "Are you sure you want to delete \"{{name}}\"? This will also delete all related tenants, statements, and messages. This action cannot be undone!",
+    "deleteConfirmCta": "Delete permanently",
+    "chart": {
+      "title": "Collection Trend — 13 Months",
+      "subtitle": "Collection rate per building by month"
+    },
+    "header": {
+      "summary": "{{count}} of {{total}} buildings"
+    },
+    "kpi": {
+      "collectionRate": "Collection rate this month",
+      "collected": "Collected",
+      "overdue": "Overdue",
+      "atRisk": "Buildings at risk",
+      "outOf": "of",
+      "outOfTotal": "of {{total}}",
+      "unpaidTenants_one": "{{count}} tenant unpaid",
+      "unpaidTenants_other": "{{count}} tenants unpaid",
+      "needsAttention": "Needs attention"
+    },
+    "card": {
+      "target": "Target",
+      "collected": "Collected",
+      "overdue": "Overdue",
+      "units_one": "1 unit",
+      "units_other": "{{count}} units",
+      "paidOfTotal": "{{paid}}/{{total}} paid",
+      "noMonthlyRate": "No monthly rate set",
+      "trend13m": "13-month trend",
+      "noTrend": "No data"
+    },
+    "status": {
+      "onTrack": "On track",
+      "partial": "Partial",
+      "atRisk": "At risk",
+      "needsSetup": "Needs setup"
+    },
+    "empty": {
+      "title": "No buildings yet",
+      "body": "Add a building to start tracking payments",
+      "firstCta": "Add first building",
+      "filteredTitle": "No buildings match the filters",
+      "filteredBody": "Try changing the search or filter parameters"
+    }
+  },
+  "whatsapp": {
+    "title": "Send WhatsApp Reminders",
+    "generating": "Generating messages...",
+    "ready": "Messages ready",
+    "click": "Click to send",
+    "sent": "Sent"
+  },
+  "upload": {
+    "dragDrop": "Drag file here or click to select",
+    "uploading": "Uploading...",
+    "success": "Uploaded successfully!",
+    "error": "Upload error",
+    "recentUploads": {
+      "title": "Recent uploads",
+      "empty": "No statements have been uploaded for this building yet",
+      "showMore": "Show more ({{count}})",
+      "transactions": "{{count}} transactions",
+      "matched": "{{count}} matched",
+      "unmatched": "{{count}} unmatched"
+    },
+    "delete": {
+      "confirmTitle": "Delete upload \"{{filename}}\"",
+      "confirmBody": "This will permanently delete the upload and all {{count}} of its transactions. Learned matches will be preserved. This action cannot be undone."
+    }
+  },
+  "transaction": {
+    "edit": {
+      "title": "Edit transaction",
+      "fields": {
+        "date": "Date",
+        "desc": "Description",
+        "amount": "Amount"
+      },
+      "splitError": {
+        "title": "Cannot update amount",
+        "body": "This transaction is split across {{count}} allocations (e.g. between multiple tenants or months). Changing the total amount requires re-defining the split.\n\nTo update the amount:\n1. Close this window\n2. Click \"Open allocation editor\" below\n3. Update the split to the new amount",
+        "cta": "Open allocation editor"
+      }
+    },
+    "delete": {
+      "confirmTitle": "Delete transaction",
+      "confirmBody": "Delete this transaction? This will remove the transaction and the associated tenant payment. This action cannot be undone."
+    }
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "saving": "Saving...",
+    "error": "Error",
+    "success": "Success",
+    "close": "Close"
+  },
+  "settings": {
+    "thresholds": {
+      "title": "Building risk thresholds",
+      "description": "Defines when a building is marked \"at risk\" / \"partial\" / \"on track\" on the home page",
+      "partialLabel": "Partial below ",
+      "partialHint": "Buildings with collection rate below this are marked \"at risk\"",
+      "onTrackLabel": "On track above ",
+      "onTrackHint": "Buildings with collection rate above this are marked \"on track\"",
+      "save": "Save",
+      "saved": "Saved",
+      "resetDefaults": "Reset to defaults",
+      "errors": {
+        "integer": "Enter whole numbers only",
+        "range": "Thresholds must be between 0 and 100",
+        "order": "Partial threshold must be less than on-track threshold",
+        "notManager": "Only managers can edit this setting"
+      }
+    }
+  },
+  "review": {
+    "currentSection": "From the file you just uploaded",
+    "currentSubtitle": "The file you uploaded: bank statement {{period}}.",
+    "currentEmpty": "All payments from this statement have been assigned to tenants. You can close the review.",
+    "legacySection": "Payments from previous uploads",
+    "legacySubtitle": "Payments from statements you uploaded before that have not yet been assigned to a tenant. These are not part of the current statement, but should be handled.",
+    "legacyChip": "From {{period}}",
+    "legacyBannerOne": "1 payment from a previous upload appears below, after the payments from the current statement.",
+    "legacyBannerMany": "{{count}} payments from previous uploads appear below, after the payments from the current statement."
+  },
+  "building": {
+    "tabs": {
+      "summary": "Summary",
+      "collection": "Collection",
+      "expenses": "Expenses",
+      "aria_label": "Building tab navigation"
+    },
+    "range": {
+      "thisMonth": "This Month",
+      "3months": "3 Months",
+      "6months": "6 Months",
+      "12months": "12 Months",
+      "custom": "Custom",
+      "from": "From",
+      "to": "To",
+      "months_count": "months",
+      "error_order": "Start date must be before end date"
+    },
+    "summary": {
+      "placeholder_title": "Summary Charts Coming Soon",
+      "placeholder_body": "This tab will show KPIs, collection trends, expenses by category and more."
+    },
+    "expenses": {
+      "placeholder_title": "Expense Management Coming Soon",
+      "placeholder_body": "Here you will be able to categorize expenses and view reports.",
+      "title": "Expenses",
+      "items": "items",
+      "bulk_categorize": "Bulk Categorize",
+      "manage_categories": "Manage Categories",
+      "all": "All",
+      "uncategorized": "Uncategorized",
+      "empty_title": "No expenses for this period",
+      "empty_body": "Expenses from bank statements will appear here",
+      "no_match": "No expenses for this category",
+      "col_date": "Date",
+      "col_description": "Description",
+      "col_vendor": "Vendor",
+      "col_category": "Category",
+      "col_amount": "Amount",
+      "subtotal": "Filtered Total",
+      "total": "Total",
+      "bulk_categorize_title": "Bulk Categorize Expenses",
+      "uncategorized_items": "uncategorized items",
+      "select_category_to_assign": "Select a category to assign",
+      "selected": "selected",
+      "select_items": "Select items to categorize",
+      "apply_category": "Apply Category",
+      "bulk_error": "Error categorizing. Please try again."
+    },
+    "categories": {
+      "title": "Manage Categories",
+      "default": "default",
+      "empty": "No categories",
+      "add_new": "Add new category",
+      "name_placeholder": "Category name...",
+      "add": "Add",
+      "duplicate_name": "A category with this name already exists",
+      "delete_blocked": "Cannot delete a category with assigned expenses"
+    }
+  },
+  "summary": {
+    "kpi": {
+      "avg_rate": "Avg Collection Rate",
+      "open_ar": "Open AR (This Period)",
+      "open_ar_hint": "Cumulative debt for current period",
+      "avg_days": "Avg Days to Pay",
+      "days": "days",
+      "exp_vs_income": "Expenses vs Income",
+      "income": "Income",
+      "expenses": "Expenses",
+      "expense_ratio": "of income"
+    },
+    "chart": {
+      "no_data": "No data for this period",
+      "no_expenses": "No expenses for this period",
+      "trend_title": "Collection Trend",
+      "expenses_title": "Expenses by Category",
+      "aging_title": "Payment Timing Breakdown",
+      "worst_payers_title": "Lowest Payers (TOP 5)"
+    },
+    "expenses": {
+      "uncategorized": "Uncategorized",
+      "uncategorized_prompt": "Categorize expenses to see the breakdown by category",
+      "go_categorize": "Go to Expense Management"
+    },
+    "aging": {
+      "days_0_7": "Paid within 7 days",
+      "days_8_30": "8–30 days",
+      "days_31_60": "31–60 days",
+      "days_60plus": "60+ days",
+      "unpaid": "Unpaid",
+      "payments": "payments"
+    },
+    "worst_payers": {
+      "apt": "Apt",
+      "no_data": "All tenants paid on time! 🎉",
+      "hint": "Click a row to view tenant details"
+    }
+  },
+  "specialCharge": {
+    "addButton": "➕ Special charge",
+    "modalTitle": "Create one-off charge",
+    "titleLabel": "Title",
+    "titlePlaceholder": "e.g. Lift repair Q1",
+    "descriptionLabel": "Description (optional)",
+    "descriptionPlaceholder": "Long-form context",
+    "totalAmountLabel": "Total amount (₪)",
+    "perApartmentAmountLabel": "Per-apartment amount (₪)",
+    "splitMethodLabel": "Split method",
+    "splitEqual": "Equal across all",
+    "splitCustom": "Custom per apartment",
+    "splitWeight": "By apartment weight",
+    "splitFlat": "Fixed amount per apt",
+    "splitEqualHelp": "Total divided equally. Cent rounding absorbs into the last apartment.",
+    "splitCustomHelp": "Enter an amount per apartment. The sum must equal the total.",
+    "splitWeightHelp": "Proportional to apartment.weight. Apartments without a weight are not charged.",
+    "splitFlatHelp": "Each selected apartment is charged the same amount.",
+    "apartmentsLabel": "Apartments to charge",
+    "selectAll": "Select all",
+    "selectNone": "Clear",
+    "apartmentsSelected": "{{n}} apartments selected",
+    "dueDateLabel": "Due date (optional)",
+    "submitLabel": "Create charge",
+    "submitting": "Creating...",
+    "cancel": "Cancel",
+    "previewTitle": "Preview",
+    "previewRowsTotal": "{{n}} charges totaling {{amount}} ₪",
+    "noApartmentsError": "Select at least one apartment",
+    "titleRequired": "Enter a title",
+    "amountRequired": "Enter an amount",
+    "customSumMismatch": "Custom amounts ({{actual}}) must sum to the total ({{expected}})",
+    "savedToast": "Special charge created"
+  },
+  "monthlyImport": {
+    "addButton": "📤 Import monthly amounts",
+    "modalTitle": "Import monthly amounts from Excel",
+    "fileLabel": "Excel file",
+    "fileHint": "File must be in the 'tenants' format - apartment, floor, classification, name, phone, monthly amount.",
+    "previewing": "Parsing file...",
+    "previewTitle": "Preview",
+    "matchedCount": "{{n}} apartments matched",
+    "unmatchedCount": "{{n}} apartments unmatched",
+    "updateCount": "{{n}} changes will be applied",
+    "aptHeader": "Apt",
+    "currentHeader": "Current",
+    "newHeader": "New",
+    "deltaHeader": "Delta",
+    "statusHeader": "Status",
+    "statusUnchanged": "Unchanged",
+    "statusUpdate": "Update",
+    "statusNewValue": "New",
+    "statusUnmatched": "Unmatched",
+    "scopeLabel": "Apply to",
+    "scopeFutureOnly": "Future months only",
+    "scopeFutureOnlyHelp": "Updates the apartment's expected amount. Existing month rows (including current month) are not touched.",
+    "scopeFuturePlusCurrent": "Future + current month",
+    "scopeFuturePlusCurrentHelp": "Also updates the current month if it has not been paid yet.",
+    "scopeAllUnpaid": "All unpaid months",
+    "scopeAllUnpaidHelp": "Past unpaid months are rewritten to the new amount. Paid months are NEVER changed.",
+    "applyButton": "Apply",
+    "applying": "Applying...",
+    "cancel": "Cancel",
+    "noFileSelected": "Please select a file",
+    "wrongFileType": "Please upload an Excel file (.xlsx)",
+    "appliedResult": "Import complete: {{apts}} apartments updated, {{periods}} months changed"
+  },
+  "auth": {
+    "emailLabel": "Email address",
+    "passwordLabel": "Password",
+    "signIn": "Sign in",
+    "signingIn": "Signing in...",
+    "error": "Sign-in failed",
+    "newTenant": "New tenant?",
+    "registerHere": "Register here"
+  },
+  "breadcrumb": {
+    "home": "Home"
+  }
+}

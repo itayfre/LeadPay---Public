@@ -1,0 +1,91 @@
+{# backend/app/templates/tenant_report.html.j2 #}
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Heebo'; src: url('file://{{ font_dir }}/Heebo-Regular.ttf'); font-weight: 400; }
+  @font-face { font-family: 'Heebo'; src: url('file://{{ font_dir }}/Heebo-Bold.ttf'); font-weight: 700; }
+  @page {
+    size: A4 portrait;
+    margin: 18mm 14mm 18mm 14mm;
+    @top-left { content: "{{ payload.tenant.name }} · {{ payload.period.label }}"; font-family: 'Heebo'; font-size: 9pt; color: #888; }
+    @bottom-right { content: "עמוד " counter(page) " · LeadPay"; font-family: 'Heebo'; font-size: 9pt; color: #888; }
+  }
+  body { font-family: 'Heebo', sans-serif; direction: rtl; font-size: 10pt; color: #222; line-height: 1.4; }
+  h1 { font-size: 18pt; margin: 0 0 4px; }
+  h2 { font-size: 13pt; margin: 18px 0 8px; color: #1a1a2e; }
+  .meta { color: #666; font-size: 10pt; }
+  .badge { display: inline-block; background: #e7f5ff; border: 1px solid #b9dffd; color: #0d6efd; padding: 3px 8px; border-radius: 6px; font-size: 9pt; margin-top: 6px; }
+  .cards { display: flex; gap: 10mm; margin: 12mm 0 6mm; }
+  .card { flex: 1; padding: 6mm; border-radius: 8px; text-align: center; }
+  .card-debt-p { background: #fff3f3; border: 1px solid #ffd5d5; }
+  .card-debt-l { background: #fff8e8; border: 1px solid #ffe4a8; }
+  .card-paid   { background: #eef9f0; border: 1px solid #c1e7c8; }
+  .card .lbl { font-size: 9pt; color: #555; margin-bottom: 4px; }
+  .card .val { font-size: 16pt; font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; margin-top: 6px; }
+  th, td { border: 1px solid #d8d8d8; padding: 4px 6px; text-align: right; font-size: 9.5pt; }
+  th { background: #f3f3f3; font-weight: 700; }
+  tr.unpaid  td { background: #fff5f5; }
+  tr.partial td { background: #fffbe6; }
+  .empty { color: #888; font-style: italic; margin-top: 6px; }
+</style>
+</head>
+<body>
+  <h1>{{ payload.tenant.name }}</h1>
+  <div class="meta">
+    דירה {{ payload.tenant.apartment_number }}{% if payload.tenant.floor %} · קומה {{ payload.tenant.floor }}{% endif %}
+    · {{ payload.tenant.building.name }}, {{ payload.tenant.building.address }}, {{ payload.tenant.building.city }}
+  </div>
+  <div class="meta"><strong>{{ payload.period.label }}</strong></div>
+  {% if payload.tenant.standing_order %}
+    <div class="badge">
+      הוראת קבע פעילה
+      {%- if payload.tenant.standing_order.amount %} — ₪{{ "{:,.0f}".format(payload.tenant.standing_order.amount) }} לחודש{% endif %}
+      {%- if payload.tenant.standing_order.end_date %} (עד {{ payload.tenant.standing_order.end_date }}){% endif %}
+    </div>
+  {% endif %}
+
+  <div class="cards">
+    <div class="card card-debt-p"><div class="lbl">חוב לתקופה</div><div class="val">₪{{ "{:,.0f}".format(payload.summary.period_debt) }}</div></div>
+    <div class="card card-debt-l"><div class="lbl">חוב כולל</div><div class="val">₪{{ "{:,.0f}".format(payload.summary.lifetime_debt) }}</div></div>
+    <div class="card card-paid"><div class="lbl">סה״כ שולם בתקופה</div><div class="val">₪{{ "{:,.0f}".format(payload.summary.period_paid) }}</div></div>
+  </div>
+
+  <h2>פירוט חודשי</h2>
+  <table>
+    <thead><tr><th>חודש</th><th>צפוי</th><th>שולם</th><th>הפרש</th><th>סטטוס</th></tr></thead>
+    <tbody>
+      {% for r in payload.months %}
+        <tr class="{{ r.status }}">
+          <td>{{ r.period_label }}</td>
+          <td>₪{{ "{:,.0f}".format(r.expected) }}</td>
+          <td>₪{{ "{:,.0f}".format(r.paid) }}</td>
+          <td>{% if r.difference < 0 %}-₪{{ "{:,.0f}".format(-r.difference) }}{% else %}₪{{ "{:,.0f}".format(r.difference) }}{% endif %}</td>
+          <td>{% if r.status == 'paid' %}שולם{% elif r.status == 'partial' %}חלקי{% else %}לא שולם{% endif %}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>תנועות בתקופה</h2>
+  {% if not payload.transactions %}
+    <div class="empty">אין תנועות בתקופה זו</div>
+  {% else %}
+    <table>
+      <thead><tr><th>תאריך</th><th>תיאור</th><th>סכום</th><th>אופן תשלום</th></tr></thead>
+      <tbody>
+        {% for t in payload.transactions %}
+          <tr>
+            <td>{{ t.date.split('T')[0] if 'T' in t.date else t.date }}</td>
+            <td>{{ t.description }}</td>
+            <td>₪{{ "{:,.0f}".format(t.amount) }}</td>
+            <td>{{ t.method }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</body>
+</html>
