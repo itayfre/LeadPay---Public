@@ -46,6 +46,27 @@ all in Hebrew with RTL support.
 
 ---
 
+## Screenshots
+
+> Building names, addresses, and tenant/payer details are **blurred** — this is a public showcase of a live product with real customer data.
+
+### Login
+![Login](docs/screenshots/01-login.png)
+
+### Buildings dashboard — portfolio KPIs, per-building collection status, risk filters
+![Buildings dashboard](docs/screenshots/02-buildings.png)
+
+### Bank-statement review — fuzzy Hebrew name matching with confidence scores
+![Statement review and matching](docs/screenshots/05-review.png)
+
+### Multi-channel reminders — select buildings, ownership type, and debt filters
+![Send reminders](docs/screenshots/04-reminders.png)
+
+### Report export — building / tenant report with PDF + DOCX export
+![Report export](docs/screenshots/03-report.png)
+
+---
+
 ## User Roles
 
 | Role | Can Do |
