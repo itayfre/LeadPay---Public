@@ -1,305 +1,141 @@
-# LeadPay - Complete Features Summary
+# LeadPay — Features
 
-## 🎉 All Features Implemented Successfully!
-
-### Session Overview
-This session completed 6 major feature implementations:
-1. ✅ Dashboard fix with tenant import
-2. ✅ Unique constraint for building names
-3. ✅ Building delete with confirmation
-4. ✅ Building edit modal
-6. ✅ WhatsApp template editor
+What the app does today, grouped by area. Last updated 2026-10-02.
+For setup, architecture and deployment see [README.md](README.md).
 
 ---
 
-## 1. Dashboard Enhancement & Tenant Import
+## Buildings
 
-### Features
-- **Empty State Detection**: Dashboard shows import UI when no tenants exist
-- **TenantImport Component**: Beautiful upload interface
-- **Drag-and-Drop**: Excel file upload with visual feedback
-- **Real-time Updates**: Automatic refresh after successful import
-- **Error Handling**: Clear error messages and recovery
+- **Portfolio page** — KPI strip across all buildings, compact building cards, risk filters.
+- **Statement freshness** — each card shows when its last bank statement was uploaded; a
+  banner lists buildings whose statements are out of date.
+- **Building view** — three tabs:
+  - **סיכום (summary)** — debtors table, insights, recent transactions, category budgets.
+  - **גבייה (collection)** — the month-by-month collection matrix with the yearly total.
+  - **הוצאות (expenses)** — categorized expenses and special charges.
+- Create, edit and delete buildings; building names are unique. Bank details per building
+  feed the "payment details" WhatsApp reply.
 
-### Usage
-1. Navigate to a building dashboard
-2. If no tenants exist, see the import prompt
-3. Click "העלה קובץ דיירים" or drag Excel file
-4. System auto-imports and refreshes
+## Tenants and apartments
 
-### File Format
-**Required columns**: שם מלא, מספר דירה, טלפון
-**Optional columns**: סוג בעלות, תשלום צפוי, שפה
+- **Excel import** — handles blank floors and "בעל דירה" rows; creates missing apartments.
+- **One active payer per apartment** — at import the app picks renter > owner > landlord and
+  shows a review card when it has to choose; any tenant can be made the active payer.
+- Ownership types: owner (בעלים), landlord (משכיר), renter (שוכר); an apartment can hold several.
+- **Committee members (ועד בית)** — mark and filter; the committee report can be sent to them.
+- Move-in dates, standing orders with their charge day, archive and restore.
+- Phone numbers normalized to `+972`.
+- All-tenants page across buildings, with no row cap.
 
----
+## Bank statements and matching
 
-## 2. Building Name Uniqueness
+- **Supported banks** — Leumi, Hapoalim, FIBI, Yahav (XLS) and Mizrahi-Tefahot (XLSX).
+- **De-duplication** that never drops a real transaction (bank reference numbers are not unique).
+- **Fuzzy Hebrew matching** — 5 strategies, learned payer-name memory, auto-confirm at ≥90%.
+- **Statement review screen** — one table per statement with filters and stats, who settled
+  each row, match / unmatch / ignore / un-ignore, and a "reviewed" stamp.
+- Bank rows can be **deleted but never edited**. Free-text search covers tenant, allocations
+  and building.
+- Recent-uploads list.
 
-### Features
-- **Database Constraint**: Unique index on `buildings.name`
-- **API Validation**: Duplicate check before insert
-- **409 Conflict**: Proper HTTP status for duplicates
-- **User-Friendly Errors**: Clear messages in Hebrew
+## Debt ledger and payments
 
-### Implementation
-- Migration: `d329d72540d2_add_unique_constraint_to_building_name.py`
-- Cleaned existing duplicates before applying constraint
-- Backend returns: `"Building with name 'X' already exists"`
+- **One per-apartment ledger** (`services/apartment_debt.py`) behind every debt number:
+  screens, reminders, reports and the buildings page all read it.
+- A month is owed from the **11th** (paying on the 10th is on time). Months not yet due are
+  shown greyed with their fee, never as debt.
+- Debt belongs to the **apartment** — payments from any of its tenant records count.
+- **Credit (זכות)** is its own number; **paid ahead** is shown separately.
+- Every debt number is **as of today**, whatever period a screen shows.
+- **Split suggestions** — for a multi-month payment the app proposes a split over the oldest
+  open months and due special charges. Nothing is written until you accept. "Split all" for a
+  whole statement.
+- **"פרוס" (spread)** — an excess month in payment history opens the allocation drawer pre-filled.
+- **Darimpo lump transfers** — upload the deposits report (דוח הפקדות) to split one transfer
+  per apartment; de-duplicated by payment confirmation id.
+- **Standing orders** — reminders skip months the bank file cannot show yet.
+- Payment history with a debt-vs-credit summary and a tenant contact card.
+- Manual payments.
 
----
+## Expenses
 
-## 3. Building Delete Functionality
+- Per-building expense categories with **monthly budgets**.
+- Automatic vendor classification with learned vendor mappings.
+- Categorize, bulk-categorize and split expense rows.
+- **Record-only** one-time expenses that charge no tenant.
+- **Special charges** — one-off charges split across apartments by weight or evenly.
+- Non-tenant income is not counted as an expense.
 
-### Features
-- **Confirmation Dialog**: Beautiful modal with warning
-- **Cascade Delete**: Removes all related data
-  - Apartments
-  - Tenants
-  - Bank Statements
-  - Transactions
-  - Name Mappings
-  - Messages
-- **Error Feedback**: Toast notifications for failures
-- **Real-time Updates**: List refreshes after deletion
+## Messages (`/messages`)
 
-### Usage
-1. Hover over building card
-2. Click 3-dot menu (top-left)
-3. Select "מחק בניין"
-4. Confirm in dialog
-5. Building and all data removed
+Everything the app says to a tenant goes out from here, and everything they say back arrives
+here: payment reminders, periodic reports, building welcome messages and announcements.
 
----
+- **סקירה (overview)** — every channel over a send-date range; message and distinct-tenant
+  counts; a delivery funnel for WhatsApp.
+- **שיחות (conversations)** — threads with in-app replies, quick replies and image attachments.
+- **תבניות (templates)** — template board and conversation tree, editable follow-up text,
+  operator-written custom templates, submission to Meta, monthly quota counter.
+- **חסומים (blocked)** — opted-out and paused tenants, error reports.
+- **דוחות (reports)** — past report batches.
+- **הגדרות (settings)** — representative phone, auto-reply on/off, escalation alerts, early-month
+  reminders.
 
-## 4. Building Edit Modal
+### Sending
+- Send from the page header or from a building. Filter by building, ownership type and debt.
+- Reminders go to the apartment's active payer; `{period}` names the months actually unpaid.
+- Warning when one phone would receive the same message twice.
+- **Welcome / announcement messages** for a building, including entering a missing Darimpo
+  key without leaving the send window.
+- No emoji in anything sent to a tenant.
 
-### Features
-- **Full-Featured Form**: All building fields editable
-  - Name
-  - Address
-  - City
-  - Bank Account Number
-  - Expected Monthly Payment
-- **Pre-filled Data**: Current values loaded automatically
-- **Validation**: Required fields enforced
-- **Error Handling**: API errors displayed in modal
-- **Real-time Updates**: Changes reflected immediately
+### WhatsApp Cloud API
+- Automated sends with Meta-approved templates; sends are blocked while a template is pending.
+- **Escalating interactive reminders** with buttons — "payment details" (uses the building's
+  bank details) and "talk to a representative".
+- **Webhook** for delivery and read receipts and inbound messages, verified by Meta signature.
+- **Auto-reply** waits until the sender stops typing for 60 seconds; button taps answer at once.
+- A reply from the page takes the thread over from the bot for a day.
+- **Opt-out keywords** (e.g. "הסר"), unknown-sender replies, emoji reactions counted as answers.
 
-### Usage
-1. Click 3-dot menu on building card
-2. Select "ערוך פרטים"
-3. Edit fields in modal
-4. Click "שמור שינויים"
-5. Modal closes, list updates
+### Other channels
+- WhatsApp link (`wa.me`) — manual send.
+- Email (Resend) and SMS (Inforu) — clients built; stub mode until credentials are set.
 
----
+## Reports
 
-## 5. WhatsApp Template Editor
+- Document kinds: **tenant**, **building**, **building — resident view** (never shows other
+  residents' names) and **combined**.
+- PDF and DOCX, Hebrew RTL, LEAD logo and palette.
+- Reports read the ledger: "חוב נכון ל-DD/MM/YYYY", with any shortfall shown in red.
+- **Report batches** — pick a quarter, freeze the data, review warnings, then send by WhatsApp
+  (document or link) or download all as a zip. Batches are kept 180 days.
+- **Public resident link** — no login, valid 30 days, revocable.
 
-### Features
-- **4 Template Types**:
-  - Payment Reminder (תזכורת תשלום)
-  - Payment Received (אישור קבלת תשלום)
-  - Partial Payment (תשלום חלקי)
-  - Overpayment (תשלום יתר)
-- **Bilingual**: Hebrew and English versions for each
-- **Live Editing**: Modal editor with preview
-- **Variable System**: Dynamic content insertion
-- **Reset Function**: Restore defaults anytime
-- **Syntax Help**: Available variables documented
+## Users, auth and legal
 
-### Available Variables
-- `{tenant_name}` - שם הדייר
-- `{building_name}` - שם הבניין
-- `{apartment_number}` - מספר דירה
-- `{amount}` - סכום
-- `{period}` - תקופה
-- `{custom_message}` - הודעה מותאמת
+- JWT login with refresh tokens; roles Manager, Worker, Viewer, Tenant.
+- Email invites, tenant self-registration with manager approval, `/setup` for the first manager.
+- Edit controls hidden from Viewer and Tenant.
+- Public accessibility statement (IS 5568) and privacy policy pages.
 
-### Usage
-1. Go to Settings → תבניות WhatsApp
-2. Click "ערוך" on any template
-3. Edit content in modal
-4. Use variables like `{tenant_name}`
-5. Save changes
+## Infrastructure
 
-### Future Enhancement
-Currently stores templates in browser state. To persist:
-1. Add `message_templates` table to database
-2. Create API endpoints (GET/PUT `/api/v1/templates`)
-3. Connect frontend to backend API
-4. WhatsApp service reads from database
-
----
-
-## Additional Improvements Made
-
-### UI/UX Enhancements
-- **Monday.com Style**: Professional gradient cards throughout
-- **Consistent Design**: All pages follow same visual language
-- **Empty States**: Helpful prompts when no data exists
-- **Loading States**: Spinners with appropriate messaging
-- **Error States**: User-friendly error messages
-- **Success Feedback**: Toast notifications and inline confirmations
-
-### Sidebar Navigation
-- **4 Main Routes**:
-  1. Buildings (🏢)
-  2. Statements Upload (📄)
-  3. Messages (💬)
-  4. Settings (⚙️)
-- **Mobile Responsive**: Hamburger menu with overlay
-- **Active States**: Visual current page indication
-- **Help Section**: Support card at bottom
-
-### Settings Hub
-- **Card Layout**: Beautiful gradient cards for each setting
-- **Links**: WhatsApp Templates accessible
-- **Placeholders**: Language, Notifications, Profile (coming soon)
+- Production on Vercel (frontend) + Railway (backend + Postgres); deploys from `master`.
+- Production database moved from Supabase to Railway Postgres on 2026-07-30.
+- Tests run on local Postgres, one throwaway database per run; ~1,200 backend tests in a few
+  seconds. A guard refuses to run against production and strips messaging credentials.
+- WeasyPrint system libraries installed on Railway via `nixpacks.toml`.
 
 ---
 
-## Technical Details
+## Timeline (2026)
 
-### New Components
-1. `TenantImport.tsx` - Upload interface
-2. `ConfirmDialog.tsx` - Reusable confirmation
-3. `BuildingEditModal.tsx` - Edit form
-4. `Sidebar.tsx` - Navigation
-5. `WhatsAppTemplates.tsx` - Template editor
-
-### New Pages
-1. `StatementsUpload.tsx` - Bulk statement upload
-2. `Messages.tsx` - Message history (placeholder)
-4. `Settings.tsx` - Settings hub
-5. `WhatsAppTemplates.tsx` - Template editor
-
-### Database Changes
-- Migration: `d329d72540d2` - Unique constraint on building name
-- Backend validation in `buildings.py` router
-- Proper 409 Conflict responses
-
----
-
-## Testing Checklist
-
-### Building Management
-- [ ] Create building (success)
-- [ ] Create duplicate building (should fail with 409)
-- [ ] Edit building details
-- [ ] Delete building (with confirmation)
-- [ ] Delete cancellation works
-
-### Dashboard & Tenants
-- [ ] Empty state shows import prompt
-- [ ] Upload Excel with tenants
-- [ ] Dashboard shows payment status
-- [ ] Statistics cards calculate correctly
-- [ ] WhatsApp reminders generate
-
-### WhatsApp Templates
-- [ ] All 4 template types visible
-- [ ] Hebrew and English versions
-- [ ] Edit modal opens
-- [ ] Changes save correctly
-- [ ] Reset to defaults works
-- [ ] Variables documented
-
-### Navigation
-- [ ] Sidebar opens/closes (mobile)
-- [ ] All routes accessible
-- [ ] Active state highlights correctly
-- [ ] Back buttons work
-- [ ] Breadcrumbs accurate
-
----
-
-## Known Limitations & Future Work
-
-### WhatsApp Templates
-- Currently browser-state only (not persisted)
-- Production needs:
-  - Database table for templates
-  - API endpoints for CRUD
-  - Backend integration with WhatsApp service
-
-### Dashboard
-- Payment status requires bank statement uploads
-- Manual matching UI not yet implemented
-- History/analytics views not built
-
-### General
-- No authentication system
-- No user roles/permissions
-- No audit logging
-- No data export features
-
----
-
-## Deployment Notes
-
-### Environment Variables
-```bash
-# Backend (.env)
-DATABASE_URL=postgresql://user:pass@host:6543/leadpay
-
-# Frontend (.env)
-VITE_API_URL=http://localhost:8000
-```
-
-### Production Checklist
-1. Set up PostgreSQL (Supabase recommended)
-2. Run migrations: `alembic upgrade head`
-3. Deploy backend to Railway/Render/Fly.io
-5. Build frontend: `npm run build`
-6. Deploy frontend to Vercel/Netlify/Cloudflare Pages
-7. Update CORS settings in FastAPI
-8. Set up SSL/HTTPS
-9. Configure domain names
-
----
-
-## Support & Documentation
-
-### API Documentation
-- Interactive docs: http://localhost:8000/docs
-- OpenAPI spec: http://localhost:8000/openapi.json
-
-### Frontend
-- Development: http://localhost:5173
-- Build output: `frontend/dist/`
-
-### Backend
-- Development: http://localhost:8000
-- Database: PostgreSQL via Supabase
-
-### Repository
-- GitHub: https://github.com/itayfre/LeadPay.git
-- All code committed and pushed
-- Detailed commit messages with Co-Authored-By
-
----
-
-## Summary Statistics
-
-### Code Written
-- **Frontend**: 8 new files, ~900 lines
-- **Backend**: 1 migration, 1 router update
-- **Total commits**: 3 feature commits
-- **Total time**: ~2 hours
-
-### Features Delivered
-- ✅ 6 major features
-- ✅ 13 new files
-- ✅ 100% of requested functionality
-- ✅ Production-ready code
-- ✅ Comprehensive documentation
-
----
-
-**All requested features are complete and production-ready! 🚀**
-
-For questions or issues, refer to:
-- README.md - Project overview
-- CLAUDE.md - Development notes
-- This file - Feature details
+| When | What shipped |
+|------|--------------|
+| Jun | Active payer per apartment, upload de-dup fix, role-based UI hiding, LEAD-branded reports |
+| Jul | Yahav + Mizrahi-Tefahot parsers, Darimpo split, record-only expenses, WhatsApp Cloud API, privacy page, Railway Postgres |
+| Aug | Payments follow the apartment, interactive reminders, webhook + inbound replies, opt-out, auto-reply, local test database |
+| Sep | Messages page, report batches + public links, committee members, statement review screen, expense splits, buildings page redesign, one debt ledger, split suggestions, building summary tab, category budgets |
+| Oct | Standing-order charge day, delete-only bank rows |
